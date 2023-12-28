@@ -13,10 +13,10 @@ public interface ProductRepository extends MongoRepository<Product,String> {
 	List<Product> findTop10ProductsByManufacturerNameAndPriceGreaterThan(String manufacturer,double price);
 	
 	@Query("{'manufacturer':{$ne:?0}, 'price':{$gt:?1, $lt:?2}")
-	List<Product> findTop10ProductsBYByManufacturerNotAndPriceBetween(String manufacturer, double lowerPrice, double higerPrice);
+	List<Product> findTop10ProductsBYByManufacturerNameNotAndPriceBetween(String manufacturer, double lowerPrice, double higerPrice);
 	
-	void deleteAllProductsByManufacturer(String manufacturer);
+	void deleteAllProductsByManufacturerName(String manufacturer);
 	
-	List<Product> findAllProductsByManufacturer(String manufacturer);
+	List<Product> findAllProductsByManufacturerName(String manufacturer);
 
 }

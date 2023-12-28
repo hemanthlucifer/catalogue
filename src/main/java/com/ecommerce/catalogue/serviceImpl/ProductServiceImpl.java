@@ -6,9 +6,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.lang.reflect.Field;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.stereotype.Service;
 
@@ -42,19 +44,24 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
 	private MessageSource messageSource;
+	
+	private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
     
 	/**
 	 * This method takes ProductDTO as argument and creates a product entity from the DTO and returns the created Product through ProductDTO
 	 * **/
 	@Override
 	public ProductDTO createProduct(ProductDTO productDto) {
+		logger.info("Create product flow started successfully");
 		Optional<Product> ifExisted = productRepository.findById(productDto.getProductId());
 		if(ifExisted.isPresent()) {
-			throw new ProductAlreadyPresentException(messageSource.getMessage(ExceptionCodes.productAlreadyPresent, null, Locale.getDefault()));
+			logger.error("Product is already present with the given Id");
+			throw new ProductAlreadyPresentException(messageSource.getMessage(ExceptionCodes.productAlreadyPresent, null, LocaleContextHolder.getLocale()));
 		}
 		Product newProduct = convertorUtil.convertProductDtoToEntity(productDto);
 		newProduct = productRepository.save(newProduct);
 		ProductDTO createdProduct = convertorUtil.convertProductToProductDto(newProduct);
+		logger.info("product created successfully");
 		return createdProduct;
 	}
     
@@ -64,9 +71,11 @@ public class ProductServiceImpl implements ProductService {
 	 * **/
 	@Override
 	public GetProductDTO getProductById(String productId) {
+		logger.info("Get product by product id flow started.");
 		Optional<Product> product = productRepository.findById(productId);
 		if(product.isEmpty() || product==null) {
-			throw new ProductNotFoundException(messageSource.getMessage(ExceptionCodes.productNotFoundCode, null, Locale.getDefault()));
+			logger.error("No product found with the given product Id.");
+			throw new ProductNotFoundException(messageSource.getMessage(ExceptionCodes.productNotFoundCode, null, LocaleContextHolder.getLocale()));
 		}
 		GetProductDTO getProductDto = new GetProductDTO();
 		ProductDTO productDto = convertorUtil.convertProductToProductDto(product.get());
@@ -82,6 +91,7 @@ public class ProductServiceImpl implements ProductService {
 		getProductDto.setProductName(productDto.getProductName());
 		getProductDto.setSpecifications(productDto.getSpecifications());
 		getProductDto.setUpsellProducts(upSellProducts);
+		logger.info("Get product by product id flow completed.");
 		return getProductDto;
 		
 	}
@@ -91,12 +101,19 @@ public class ProductServiceImpl implements ProductService {
 	 * **/
 	@Override
 	public List<ProductDTO> getAllProducts() {
+		logger.info("Get all products in the repository flow started");
 		List<Product> listOfProducts = productRepository.findAll();
 		List<ProductDTO> listOfProductDto = new ArrayList<>();
-		for(Product product : listOfProducts) {
-			ProductDTO productDto = convertorUtil.convertProductToProductDto(product);
-			listOfProductDto.add(productDto);
+		if(listOfProducts==null || listOfProducts.isEmpty()) {
+			logger.warn("No products found in the repository.");
+			return null;
+		}else {
+			for(Product product : listOfProducts) {
+				ProductDTO productDto = convertorUtil.convertProductToProductDto(product);
+				listOfProductDto.add(productDto);
+			}
 		}
+		logger.info("Get all products in the repository flow completed");
 		return listOfProductDto;
 	}
     
@@ -105,9 +122,11 @@ public class ProductServiceImpl implements ProductService {
 	 * **/
 	@Override
 	public ProductDTO updateProduct(String productId, Map<String, Object> fields) {
+		logger.info("update product by using product id flow started.");
 		Optional<Product> product = productRepository.findById(productId);
 		if(product.isEmpty() || product==null) {
-			throw new ProductNotFoundException(messageSource.getMessage(ExceptionCodes.productNotFoundCode, null, Locale.getDefault()));
+			logger.error("Product with given product Id is not found.");
+			throw new ProductNotFoundException(messageSource.getMessage(ExceptionCodes.productNotFoundCode, null, LocaleContextHolder.getLocale()));
 		}
 		fields.forEach((key,value) -> {
 			Field field = ReflectionUtils.findField(Product.class, key);
@@ -115,6 +134,7 @@ public class ProductServiceImpl implements ProductService {
 			ReflectionUtils.setField(field, product.get(), value);
 		});
 		Product updatedProduct = productRepository.save(product.get());
+		logger.info("update product by using product id flow completed.");
 		return convertorUtil.convertProductToProductDto(updatedProduct);
 	}
     
@@ -123,12 +143,15 @@ public class ProductServiceImpl implements ProductService {
 	 * **/
 	@Override
 	public ProductDTO updateProductSpecifications(String productId, Map<String, String> specifications) {
+		logger.info("Update product specifications with the given product Id started.");
 		Optional<Product> existingProduct = productRepository.findById(productId);
 		if(existingProduct.isEmpty() || existingProduct==null) {
-			throw new ProductNotFoundException(messageSource.getMessage(ExceptionCodes.productNotFoundCode, null, Locale.getDefault()));
+			logger.error("No product found with the given product ID.");
+			throw new ProductNotFoundException(messageSource.getMessage(ExceptionCodes.productNotFoundCode, null, LocaleContextHolder.getLocale()));
 		}
 		existingProduct.get().setSpecifications(specifications);
 		Product product = productRepository.save(existingProduct.get());
+		logger.info("Update product specifications with the given product Id completed.");
 		return convertorUtil.convertProductToProductDto(product);
 	}
     
@@ -137,12 +160,15 @@ public class ProductServiceImpl implements ProductService {
 	 * **/
 	@Override
 	public String deleteProductById(String productId) {
+		logger.info("Delete product with the given product Id started.");
 		Optional<Product> product = productRepository.findById(productId);
 		if(product.isEmpty() || product == null) {
-			throw new ProductNotFoundException(messageSource.getMessage(ExceptionCodes.productNotFoundCode, null, Locale.getDefault()));
+			logger.error("No product found with the given product Id.");
+			throw new ProductNotFoundException(messageSource.getMessage(ExceptionCodes.productNotFoundCode, null, LocaleContextHolder.getLocale()));
 		}
 		productRepository.delete(product.get());
-		return messageSource.getMessage(SucessMessageCodes.productDeleteionSucessCode, null,Locale.getDefault());
+		logger.info("Delete product with the given product Id completed.");
+		return messageSource.getMessage(SucessMessageCodes.productDeleteionSucessCode, null,LocaleContextHolder.getLocale());
 	}
     
 	
@@ -151,8 +177,10 @@ public class ProductServiceImpl implements ProductService {
 	 * **/
 	@Override
 	public String deleteProductsByManufacturerName(String manufacturerName) {
-		productRepository.deleteAllProductsByManufacturer(manufacturerName);
-		return messageSource.getMessage(SucessMessageCodes.catalogueDeletionSuccessCode, null,Locale.getDefault());
+		logger.info("Delete products by using manufacturer name started.");
+		productRepository.deleteAllProductsByManufacturerName(manufacturerName);
+		logger.info("Delete products by using manufacturer name completed.");
+		return messageSource.getMessage(SucessMessageCodes.catalogueDeletionSuccessCode, null,LocaleContextHolder.getLocale());
 	}
     
 	
@@ -161,6 +189,7 @@ public class ProductServiceImpl implements ProductService {
 	 * **/
 	@Override
 	public List<ProductDTO> createProductsInBulk(List<ProductDTO> products) {
+		logger.info("create products in bulk process started");
 		List<Product> bulkProducts = new ArrayList<>();
 		List<ProductDTO> bulkProductList = new ArrayList<>();
 		for(ProductDTO productDto : products) {
@@ -172,7 +201,7 @@ public class ProductServiceImpl implements ProductService {
 			ProductDTO bulkProduct = convertorUtil.convertProductToProductDto(product);
 			bulkProductList.add(bulkProduct);
 		}
-		
+		logger.info("create products in bulk process completed.");
 		return bulkProductList;
 	}
     
@@ -181,13 +210,20 @@ public class ProductServiceImpl implements ProductService {
 	 * **/
 	@Override
 	public List<ProductDTO> getProductsByManufacturer(String manufacturerName) {
-		List<Product> allProducts = productRepository.findAllProductsByManufacturer(manufacturerName);
+		logger.info("get products by manufacturer name started.");
+		List<Product> allProducts = productRepository.findAllProductsByManufacturerName(manufacturerName);
 		List<ProductDTO> productDtoList =  new ArrayList<>();
-		for(Product product: allProducts) {
-			ProductDTO productDto = convertorUtil.convertProductToProductDto(product);
-			productDtoList.add(productDto);
+		if(allProducts==null || allProducts.isEmpty()) {
+			logger.warn("No products found with the given manufacturer name.");
+			return null;
+		}else {
+			for(Product product: allProducts) {
+				ProductDTO productDto = convertorUtil.convertProductToProductDto(product);
+				productDtoList.add(productDto);
+			}
+			logger.info("get products by manufacturer name completed.");
+			return productDtoList;
 		}
-		return productDtoList;
 	}
 
 }

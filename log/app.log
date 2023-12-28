@@ -1,0 +1,8 @@
+15:00:33.514 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:00:33.520 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+15:00:33.525 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+15:00:33.589 [http-nio-8080-exec-2] INFO  c.e.c.serviceImpl.ProductServiceImpl - Get product by product id flow started.
+15:00:34.120 [http-nio-8080-exec-2] ERROR c.e.c.serviceImpl.ProductServiceImpl - No product found with the given product Id.
+15:00:34.159 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.ecommerce.catalogue.exceptions.ProductNotFoundException: No Product found with the given id.]
+15:00:57.476 [RMI TCP Connection(9)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+15:00:57.483 [RMI TCP Connection(9)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]

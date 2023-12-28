@@ -3,6 +3,8 @@ package com.ecommerce.catalogue.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +19,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpsellAndCrosssellProductsProcessor {
 	
+	private static final Logger logger = LoggerFactory.getLogger(UpsellAndCrosssellProductsProcessor.class);
+	
 	@Autowired
 	private ProductRepository productRepository;
 	
 	public List<UpsellAndCrosssellDto> upsellProducts(ProductDTO productDto){
+		logger.info("process of creating upsell products started.");
 		List<Product> upsellProducts = productRepository.findTop10ProductsByManufacturerNameAndPriceGreaterThan(productDto.getManufacturerName(), productDto.getPrice());
 		List<UpsellAndCrosssellDto> upsellProductDtos = new ArrayList<>();
 		for(Product product : upsellProducts) {
@@ -31,14 +36,16 @@ public class UpsellAndCrosssellProductsProcessor {
 			upsellProductDto.setPrice(product.getPrice());
 			upsellProductDtos.add(upsellProductDto);
 		}
+		logger.info("process of creating upsell products completed");
 		return upsellProductDtos;
 	}
 	
 	
 	public List<UpsellAndCrosssellDto>crosssellProducts(ProductDTO productDto){
+		logger.info("Process of creating cross sell products started");
 		double lowerPrice = productDto.getPrice()-10000;
 		double higherPrice = productDto.getPrice()+10000;
-		List<Product> crosssellProducts = productRepository.findTop10ProductsBYByManufacturerNotAndPriceBetween(productDto.getManufacturerName(), lowerPrice, higherPrice);
+		List<Product> crosssellProducts = productRepository.findTop10ProductsBYByManufacturerNameNotAndPriceBetween(productDto.getManufacturerName(), lowerPrice, higherPrice);
 		List<UpsellAndCrosssellDto> crosssellProductDtos = new ArrayList<>();
 		for(Product product : crosssellProducts){
 			UpsellAndCrosssellDto crossellProductDto = new UpsellAndCrosssellDto();
@@ -48,6 +55,7 @@ public class UpsellAndCrosssellProductsProcessor {
 			crossellProductDto.setProductName(product.getProductName());
 			crosssellProductDtos.add(crossellProductDto);
 		}
+		logger.info("Process of creating crosssell products  completed.");
 		return crosssellProductDtos;
 		
 	}

@@ -1,0 +1,90 @@
+14:52:09.530 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+14:52:09.540 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+14:52:09.544 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+14:52:09.554 [http-nio-8080-exec-1] INFO  c.e.c.serviceImpl.ProductServiceImpl - Get product by product id flow started.
+14:52:10.680 [http-nio-8080-exec-1] ERROR c.e.c.serviceImpl.ProductServiceImpl - No product found with the given product Id.
+14:52:10.685 [http-nio-8080-exec-1] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.context.NoSuchMessageException: No message found under code 'ECOMM0001' for locale 'en_IN'.] with root cause
+org.springframework.context.NoSuchMessageException: No message found under code 'ECOMM0001' for locale 'en_IN'.
+	at org.springframework.context.support.DelegatingMessageSource.getMessage(DelegatingMessageSource.java:76)
+	at com.ecommerce.catalogue.serviceImpl.ProductServiceImpl.getProductById(ProductServiceImpl.java:77)
+	at com.ecommerce.catalogue.web.CatalogueController.getProductById(CatalogueController.java:61)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:254)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:182)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+14:55:05.065 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+14:55:05.069 [Thread-8] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+14:55:05.593 [restartedMain] INFO  c.e.catalogue.CatalogueApplication - Starting CatalogueApplication using Java 17.0.9 with PID 2880 (C:\Hemanth\catalogue\target\classes started by heman in C:\Hemanth\catalogue)
+14:55:05.594 [restartedMain] INFO  c.e.catalogue.CatalogueApplication - No active profile set, falling back to 1 default profile: "default"
+14:55:37.967 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+14:55:38.016 [restartedMain] INFO  c.e.catalogue.CatalogueApplication - Starting CatalogueApplication using Java 17.0.9 with PID 15736 (C:\Hemanth\catalogue\target\classes started by heman in C:\Hemanth\catalogue)
+14:55:38.018 [restartedMain] INFO  c.e.catalogue.CatalogueApplication - No active profile set, falling back to 1 default profile: "default"
+14:55:38.078 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+14:55:38.090 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+14:55:39.057 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+14:55:39.060 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+14:55:39.178 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 110 ms. Found 1 MongoDB repository interface.
+14:55:39.832 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+14:55:39.846 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+14:55:39.849 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+14:55:39.849 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+14:55:39.938 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+14:55:39.938 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1846 ms
+14:55:40.358 [restartedMain] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.11.1"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Eclipse Adoptium/17.0.9+9"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='hemanth', source='admin', password=<hidden>, mechanismProperties=<hidden>}, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@70ca9820, com.mongodb.Jep395RecordCodecProvider@17414ca5, com.mongodb.KotlinCodecProvider@38f56cec]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[127.0.0.1:27017], srvHost=catalogue.sn0iguw.mongodb.net, srvServiceName=mongodb, mode=MULTIPLE, requiredClusterType=REPLICA_SET, requiredReplicaSetName='atlas-e0chvs-shard-0', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=true, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
+14:55:40.749 [cluster-ClusterId{value='658d3f14c9412f41f82d8cab', description='null'}-srv-catalogue.sn0iguw.mongodb.net] INFO  org.mongodb.driver.cluster - Adding discovered server ac-puhxnoz-shard-00-02.sn0iguw.mongodb.net:27017 to client view of cluster
+14:55:40.782 [cluster-ClusterId{value='658d3f14c9412f41f82d8cab', description='null'}-srv-catalogue.sn0iguw.mongodb.net] INFO  org.mongodb.driver.cluster - Adding discovered server ac-puhxnoz-shard-00-00.sn0iguw.mongodb.net:27017 to client view of cluster
+14:55:40.789 [cluster-ClusterId{value='658d3f14c9412f41f82d8cab', description='null'}-srv-catalogue.sn0iguw.mongodb.net] INFO  org.mongodb.driver.cluster - Adding discovered server ac-puhxnoz-shard-00-01.sn0iguw.mongodb.net:27017 to client view of cluster
+14:55:41.450 [cluster-ClusterId{value='658d3f14c9412f41f82d8cab', description='null'}-ac-puhxnoz-shard-00-02.sn0iguw.mongodb.net:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=ac-puhxnoz-shard-00-02.sn0iguw.mongodb.net:27017, type=REPLICA_SET_PRIMARY, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=17, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=296938800, setName='atlas-e0chvs-shard-0', canonicalAddress=ac-puhxnoz-shard-00-02.sn0iguw.mongodb.net:27017, hosts=[ac-puhxnoz-shard-00-00.sn0iguw.mongodb.net:27017, ac-puhxnoz-shard-00-02.sn0iguw.mongodb.net:27017, ac-puhxnoz-shard-00-01.sn0iguw.mongodb.net:27017], passives=[], arbiters=[], primary='ac-puhxnoz-shard-00-02.sn0iguw.mongodb.net:27017', tagSet=TagSet{[Tag{name='availabilityZone', value='aps1-az2'}, Tag{name='nodeType', value='ELECTABLE'}, Tag{name='provider', value='AWS'}, Tag{name='region', value='AP_SOUTH_1'}, Tag{name='workloadType', value='OPERATIONAL'}]}, electionId=7fffffff0000000000000006, setVersion=1, topologyVersion=TopologyVersion{processId=6584292f8d48eeb17bbc437a, counter=7}, lastWriteDate=Thu Dec 28 14:55:37 IST 2023, lastUpdateTimeNanos=591208910218500}
+14:55:41.450 [cluster-ClusterId{value='658d3f14c9412f41f82d8cab', description='null'}-ac-puhxnoz-shard-00-00.sn0iguw.mongodb.net:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=ac-puhxnoz-shard-00-00.sn0iguw.mongodb.net:27017, type=REPLICA_SET_SECONDARY, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=17, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=282920200, setName='atlas-e0chvs-shard-0', canonicalAddress=ac-puhxnoz-shard-00-00.sn0iguw.mongodb.net:27017, hosts=[ac-puhxnoz-shard-00-00.sn0iguw.mongodb.net:27017, ac-puhxnoz-shard-00-02.sn0iguw.mongodb.net:27017, ac-puhxnoz-shard-00-01.sn0iguw.mongodb.net:27017], passives=[], arbiters=[], primary='ac-puhxnoz-shard-00-02.sn0iguw.mongodb.net:27017', tagSet=TagSet{[Tag{name='availabilityZone', value='aps1-az1'}, Tag{name='nodeType', value='ELECTABLE'}, Tag{name='provider', value='AWS'}, Tag{name='region', value='AP_SOUTH_1'}, Tag{name='workloadType', value='OPERATIONAL'}]}, electionId=null, setVersion=1, topologyVersion=TopologyVersion{processId=658426a32a025c9974210696, counter=9}, lastWriteDate=Thu Dec 28 14:55:37 IST 2023, lastUpdateTimeNanos=591208910218500}
+14:55:41.450 [cluster-ClusterId{value='658d3f14c9412f41f82d8cab', description='null'}-ac-puhxnoz-shard-00-01.sn0iguw.mongodb.net:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=ac-puhxnoz-shard-00-01.sn0iguw.mongodb.net:27017, type=REPLICA_SET_SECONDARY, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=17, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=149958000, setName='atlas-e0chvs-shard-0', canonicalAddress=ac-puhxnoz-shard-00-01.sn0iguw.mongodb.net:27017, hosts=[ac-puhxnoz-shard-00-00.sn0iguw.mongodb.net:27017, ac-puhxnoz-shard-00-02.sn0iguw.mongodb.net:27017, ac-puhxnoz-shard-00-01.sn0iguw.mongodb.net:27017], passives=[], arbiters=[], primary='ac-puhxnoz-shard-00-02.sn0iguw.mongodb.net:27017', tagSet=TagSet{[Tag{name='availabilityZone', value='aps1-az3'}, Tag{name='nodeType', value='ELECTABLE'}, Tag{name='provider', value='AWS'}, Tag{name='region', value='AP_SOUTH_1'}, Tag{name='workloadType', value='OPERATIONAL'}]}, electionId=null, setVersion=1, topologyVersion=TopologyVersion{processId=65845b739afad1b3a6025bc6, counter=4}, lastWriteDate=Thu Dec 28 14:55:37 IST 2023, lastUpdateTimeNanos=591208910281500}
+14:55:41.457 [cluster-ClusterId{value='658d3f14c9412f41f82d8cab', description='null'}-ac-puhxnoz-shard-00-02.sn0iguw.mongodb.net:27017] INFO  org.mongodb.driver.cluster - Discovered replica set primary ac-puhxnoz-shard-00-02.sn0iguw.mongodb.net:27017 with max election id 7fffffff0000000000000006 and max set version 1
+14:55:41.640 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+14:55:42.386 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+14:55:42.411 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+14:55:42.423 [restartedMain] INFO  c.e.catalogue.CatalogueApplication - Started CatalogueApplication in 4.8 seconds (process running for 6.071)
