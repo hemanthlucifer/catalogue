@@ -62,6 +62,18 @@ public class CatalogueController {
 		return new ResponseEntity<>(product,HttpStatus.OK);
 	}
 	
+	@Operation(summary = "To get all products for the given manufacturer name.") 
+	@ApiResponses(value = { 
+	        @ApiResponse(responseCode = "200", description = "Products found with the given manufacturer name"), 
+	@ApiResponse(responseCode = "401",description = "Unauthorized user"), 
+	        @ApiResponse(responseCode = "404",description = "manufacturer not found"), 
+	        @ApiResponse(responseCode = "400",description = "Invalid request")})
+	@GetMapping("/{manufacturerName}")
+	public ResponseEntity<List<ProductDTO>> getProductByManufacturerName(@PathVariable String manufacturerName){
+		List<ProductDTO> products = productService.getProductsByManufacturer(manufacturerName);
+		return new ResponseEntity<>(products,HttpStatus.OK);
+	}
+	
 	@Operation(summary = "To get all products in the catalogue") 
 	@ApiResponses(value = { 
 	        @ApiResponse(responseCode = "200", description = "All products returned"), 
